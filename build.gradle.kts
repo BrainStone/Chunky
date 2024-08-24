@@ -12,7 +12,7 @@ subprojects {
     plugins.apply("com.github.johnrengelman.shadow")
 
     group = "${project.property("group")}"
-    version = "${project.property("version")}.${commitsSinceLastTag()}"
+    version = "${project.property("version")}.${commitsSinceLastTag()}-java16backport"
 
     repositories {
         mavenCentral()
@@ -29,7 +29,7 @@ subprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-            options.release = 17
+            options.release = 16
             options.compilerArgs.add("-Xlint:none")
         }
         jar {

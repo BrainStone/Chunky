@@ -22,7 +22,7 @@ import org.popcraft.chunky.platform.BukkitConfig;
 import org.popcraft.chunky.platform.BukkitPlayer;
 import org.popcraft.chunky.platform.BukkitSender;
 import org.popcraft.chunky.platform.BukkitServer;
-import org.popcraft.chunky.platform.Folia;
+//import org.popcraft.chunky.platform.Folia;
 import org.popcraft.chunky.platform.Sender;
 import org.popcraft.chunky.util.TranslationKey;
 import org.popcraft.chunky.util.Version;
@@ -53,11 +53,11 @@ public final class ChunkyBukkit extends JavaPlugin implements Listener {
         getServer().getServicesManager().register(ChunkyAPI.class, chunky.getApi(), this, ServicePriority.Normal);
         if (chunky.getConfig().getContinueOnRestart()) {
             final Runnable continueTask = () -> chunky.getCommands().get(CommandLiteral.CONTINUE).execute(chunky.getServer().getConsole(), CommandArguments.empty());
-            if (Folia.isFolia()) {
-                Folia.onServerInit(this, continueTask);
-            } else {
+            //if (Folia.isFolia()) {
+            //    Folia.onServerInit(this, continueTask);
+            //} else {
                 getServer().getScheduler().scheduleSyncDelayedTask(this, continueTask);
-            }
+            //}
         }
         if (getServer().getPluginManager().getPlugin("WorldBorder") != null) {
             chunky.getServer().getIntegrations().put("border", new WorldBorderIntegration());
