@@ -88,14 +88,14 @@ public class BukkitWorld implements World {
                     world.removePluginChunkTicket(x, z, plugin);
                     removeTicketFuture.complete(null);
                 };
-                if (Folia.isFolia()) {
-                    final org.bukkit.Location location = new org.bukkit.Location(world, x << 4, 0, z << 4);
-                    Folia.schedule(plugin, location, addTicketTask);
-                    CompletableFuture.runAsync(() -> Folia.schedule(plugin, location, removeTicketTask), CompletableFuture.delayedExecutor(TICKING_LOAD_DURATION, TimeUnit.SECONDS));
-                } else {
+                //if (Folia.isFolia()) {
+                //    final org.bukkit.Location location = new org.bukkit.Location(world, x << 4, 0, z << 4);
+                //    Folia.schedule(plugin, location, addTicketTask);
+                //    CompletableFuture.runAsync(() -> Folia.schedule(plugin, location, removeTicketTask), CompletableFuture.delayedExecutor(TICKING_LOAD_DURATION, TimeUnit.SECONDS));
+                //} else {
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, addTicketTask);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, removeTicketTask, TICKING_LOAD_DURATION * 20L);
-                }
+                //}
             });
             if (AWAIT_TICKET_REMOVAL) {
                 return removeTicketFuture;
@@ -127,14 +127,14 @@ public class BukkitWorld implements World {
 
     @Override
     public int getElevation(final int x, final int z) {
-        if (Folia.isFolia()) {
-            final org.bukkit.Location location = new org.bukkit.Location(world, x, 0, z);
-            return CompletableFuture
-                    .supplyAsync(() -> getElevationForLocation(x, z), command -> Folia.schedule(plugin, location, command))
-                    .join();
-        } else {
+        //if (Folia.isFolia()) {
+        //    final org.bukkit.Location location = new org.bukkit.Location(world, x, 0, z);
+        //    return CompletableFuture
+        //            .supplyAsync(() -> getElevationForLocation(x, z), command -> Folia.schedule(plugin, location, command))
+        //            .join();
+        //} else {
             return getElevationForLocation(x, z);
-        }
+        //}
     }
 
     private int getElevationForLocation(final int x, final int z) {

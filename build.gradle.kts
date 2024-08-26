@@ -12,7 +12,7 @@ subprojects {
     plugins.apply("io.github.goooler.shadow")
 
     group = "${project.property("group")}"
-    version = "${project.property("version")}.${commitsSinceLastTag()}"
+    version = "${project.property("version")}.${commitsSinceLastTag()}-java16backport"
 
     repositories {
         mavenCentral()
@@ -21,7 +21,7 @@ subprojects {
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
+            languageVersion.set(JavaLanguageVersion.of(17))
         }
         withSourcesJar()
     }
@@ -29,7 +29,7 @@ subprojects {
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-            options.release = 21
+            options.release = 16
             options.compilerArgs.add("-Xlint:none")
         }
         jar {
